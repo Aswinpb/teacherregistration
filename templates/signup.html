@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"></script>
+    {% load static %}
+    <style>
+        img#logo {
+            height: 5vh;
+            width: 5vw;
+        }
+
+        a#homehead {
+            color: lightseagreen;
+            font-style: italic;
+            font-size: larger;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+
+        body {
+            background-image: url('{% static "images/img3.jpg"%}');
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table#tab1 {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        th {
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" id="logo" alt=""
+                class="img-fluid"></a>
+        <a class="navbar-brand" href="#" id="homehead">Altos UNIVERSITY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house"></i>Home</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup' %}"><i class="bi bi-pencil-square"></i>Register</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'loginpage' %}"><i class="bi bi-key"></i>Sign in</a>
+                </li>
+
+
+
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+    {% block content %}
+<br>
+<br>
+    <div class="container-fluid">
+        <h1 style="color: white; font-family: 'Times New Roman', Times, serif;" >Registration</h1>
+    </div>
+    <br><br>
+    <div class="container">
+        {% for message in messages %}
+        <h5>
+            <div class="alert alert-danger mt-5" style="width: 50%;">
+                {{ message }}
+            </div>
+        </h5>
+        {% endfor %}
+    </div>
+    <div class="container bg-light" style="border-radius: 10px; width:50%">
+        <form action="{% url 'usercreate' %}" method="post" class="form pt-5 pb-5" style="width: 50%; margin-left:25%">
+            {% csrf_token %}
+
+            <input type="text" name="first_name" class="form-control" placeholder="First Name"><br>
+            <input type="text" name="last_name" class="form-control" placeholder="Last Name"><br>
+            <input type="text" name="username" class="form-control" placeholder="Username"><br>
+            <input type="email" name="email" class="form-control" placeholder="Email"><br>
+            <input type="password" name="password" class="form-control" placeholder="Strong Password"><br>
+            <input type="password" name="cpassword" class="form-control" placeholder="Confirm Password"><br>
+            <br>
+
+            <button type="submit" class="btn btn-outline-info" style="margin-left: 40%;">Submit</button>
+            <br>
+            <br>
+            <br>
+            <p class='text-muted'>Already a member. <a href="#">Login</a></p>
+        </form>
+    </div>
+    {% endblock %}
